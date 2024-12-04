@@ -8,7 +8,34 @@ import CommonNav from "@/components/common/navigation/CommonNav";
 import CommonFooter from "@/components/common/footer/CommonFooter";
 import Card from "./components/Card";
 
+import axios from "axios";
+import { useEffect } from "react";
+
 function index() {
+  const getData = async () => {
+    // 오픈 API 호출
+    const API_URL = "https://api.unsplash.com/search/photos";
+    const API_KEY = "S8CiHkFrEjdA2JCNJQNxMHbRTWT9HiX4lEqv9vwC1WY";
+    const PER_PAGE = 30;
+
+    const searchValue = "Korea";
+    const pageValue = 100;
+
+    try {
+      const res = await axios.get(
+        `${API_URL}?query=${searchValue}&client_id=${API_KEY}&page=${pageValue}&per_page=${PER_PAGE}`
+      );
+
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    // API 호출
+    getData();
+  }, []);
   return (
     <div className={styles.page}>
       {/* 공통 헤더 UI */}

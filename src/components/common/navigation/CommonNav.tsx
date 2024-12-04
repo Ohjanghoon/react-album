@@ -23,7 +23,8 @@ function CommonNav() {
       </Link>
     );
   });
-  return <div className={styles.navigation}>{navLinks}</div>;
+  // 시멘틱 태그를 활용하여 코드의 명확성 증대
+  return <nav className={styles.navigation}>{navLinks}</nav>;
 }
 
 export default CommonNav;

@@ -2,7 +2,8 @@ import styles from "./CommonHeader.module.scss";
 
 function CommonHeader() {
   return (
-    <div className={styles.header}>
+    // 시멘틱 태그를 활용하여 코드의 명확성 증대
+    <header className={styles.header}>
       <div className={styles.header__logoBox}>
         <img
           className={styles.header__logoBox__logo}
@@ -18,7 +19,7 @@ function CommonHeader() {
           Ollie | ollie@gmail.com
         </span>
       </div>
-    </div>
+    </header>
   );
 }
 
