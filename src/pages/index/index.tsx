@@ -11,15 +11,17 @@ import CommonSearchBar from "@/components/common/searchBar/CommonSearchBar";
 import CommonNav from "@/components/common/navigation/CommonNav";
 import CommonFooter from "@/components/common/footer/CommonFooter";
 import Card from "./components/Card";
+import DetailDialog from "@/components/common/dialog/DetailDialog";
 
 import { CardDTO } from "./types/card";
 
 function index() {
   const storeImage = useRecoilValue(imageData);
   const [imgData, setImageData] = useState<CardDTO[]>([]);
+  const [open, setOpen] = useState<boolean>(false); // 이미지 상세 다이얼로그 발생(관리) State
 
   const CARD_LIST = storeImage.data.results.map((card: CardDTO) => {
-    return <Card data={card} key={card.id} />;
+    return <Card data={card} key={card.id} handleDialog={setOpen} />;
   });
 
   return (
@@ -44,6 +46,7 @@ function index() {
       </div>
       {/* 공통 푸터 UI */}
       <CommonFooter />
+      {open && <DetailDialog />}
     </div>
   );
 }
