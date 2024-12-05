@@ -1,5 +1,6 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { imageData } from "@/store/selecotrs/imageSelector";
 
 // CSS
 import styles from "./styles/index.module.scss";
@@ -14,42 +15,13 @@ import Card from "./components/Card";
 import { CardDTO } from "./types/card";
 
 function index() {
-  const [imgUrls, setImgUrls] = useState([]);
+  const storeImage = useRecoilValue(imageData);
+  const [imgData, setImageData] = useState<CardDTO[]>([]);
 
-  const getData = async () => {
-    // 오픈 API 호출
-    const API_URL = "https://api.unsplash.com/search/photos";
-    const API_KEY = "S8CiHkFrEjdA2JCNJQNxMHbRTWT9HiX4lEqv9vwC1WY";
-    const PER_PAGE = 30;
-
-    const searchValue = "Korea";
-    const pageValue = 100;
-
-    try {
-      const res = await axios.get(
-        `${API_URL}?query=${searchValue}&client_id=${API_KEY}&page=${pageValue}&per_page=${PER_PAGE}`
-      );
-
-      console.log(res);
-
-      // res.data.results 배열의 데이터 활용
-
-      if (res.status === 200) {
-        setImgUrls(res.data.results);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const cardList = imgUrls.map((card: CardDTO) => {
+  const CARD_LIST = storeImage.data.results.map((card: CardDTO) => {
     return <Card data={card} key={card.id} />;
   });
 
-  useEffect(() => {
-    // API 호출
-    getData();
-  }, []);
   return (
     <div className={styles.page}>
       {/* 공통 헤더 UI */}
@@ -68,7 +40,7 @@ function index() {
             <CommonSearchBar />
           </div>
         </div>
-        <div className={styles.page__contents__imageBox}>{cardList}</div>
+        <div className={styles.page__contents__imageBox}>{CARD_LIST}</div>
       </div>
       {/* 공통 푸터 UI */}
       <CommonFooter />
