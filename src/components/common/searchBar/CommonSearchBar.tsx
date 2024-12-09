@@ -2,14 +2,15 @@ import { useState } from "react";
 import styles from "./CommonSearchBar.module.scss";
 import { useRecoilState } from "recoil";
 import { searchState } from "@/store/atoms/searchState";
+import { pageState } from "@/store/atoms/pageState";
 
 function CommonSearchBar() {
   const [search, setSearch] = useRecoilState(searchState);
+  const [page, setPage] = useRecoilState(pageState);
   const [text, setText] = useState("");
 
   // input 입력창에 따른 값 업데이트
   const onChange = (event) => {
-    console.log(event.target.value);
     setText(event.target.value);
   };
 
@@ -22,6 +23,7 @@ function CommonSearchBar() {
       // 작성한 input value 값 할당
       setSearch(text);
     }
+    setPage(1);
   };
 
   // Enter 키를 눌렀을 때 발생하는 이벤트
@@ -34,6 +36,7 @@ function CommonSearchBar() {
         // 작성한 input value 값 할당
         setSearch(text);
       }
+      setPage(1);
     }
   };
 

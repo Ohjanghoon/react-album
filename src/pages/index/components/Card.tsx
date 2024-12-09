@@ -9,7 +9,6 @@ interface Props {
 
 function Card({ data, handleOpenDialog: handleDialog, handleSetData }: Props) {
   const openDialog = () => {
-    console.log("함수 호출");
     handleDialog(true);
     handleSetData(data);
   };
