@@ -4,6 +4,10 @@ import styles from "./CommonHeader.module.scss";
 function CommonHeader() {
   const navigate = useNavigate();
 
+  // 홈 화면으로 이동
+  const moveToHome = () => {
+    navigate("/");
+  };
   // 북마크 페이지로 이동
   const moveToPage = () => {
     navigate("/bookmark");
@@ -12,7 +16,7 @@ function CommonHeader() {
   return (
     // 시멘틱 태그를 활용하여 코드의 명확성 증대
     <header className={styles.header}>
-      <div className={styles.header__logoBox}>
+      <div className={styles.header__logoBox} onClick={moveToHome}>
         <img
           className={styles.header__logoBox__logo}
           src="/src/assets/images/image-logo.png"

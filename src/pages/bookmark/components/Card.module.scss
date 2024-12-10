@@ -25,6 +25,8 @@
       width: 100%;
       height: 100%;
       border-radius: 12px 12px 0 0;
+
+      object-fit: cover;
     }
   }
   &__infoBox {
@@ -54,7 +56,13 @@
         width: 120px;
       }
       .value {
+        width: 112px;
         color: $color-gray-500;
+
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        word-break: break-all;
       }
     }
   }
