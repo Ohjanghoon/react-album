@@ -64,9 +64,22 @@ function DetailDialog({ data, handleOpenDialog }: Props) {
     ) {
       setBookmark(true);
     } else if (!getLocalStorage) return;
+
+    // ESC 키를 눌렀을 때, 다이얼로그 창 닫기
+    const escKeyDownCloseDialog = (event: any) => {
+      if (event.key === "Escape") {
+        closeDialog();
+      }
+    };
+
+    // 키 다운 했을 때, 이벤트로 등록 및 해제
+    window.addEventListener("keydown", escKeyDownCloseDialog);
+    return () => {
+      window.removeEventListener("keydown", escKeyDownCloseDialog);
+    };
   }, []);
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={closeDialog}>
       <div className={styles.container__dialog}>
         <div className={styles.container__dialog__header}>
           <div className={styles.close}>
